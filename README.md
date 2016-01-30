@@ -27,6 +27,39 @@ The following options can also be specified using the prefix -DCouchDBSimulation
   - rampUpTime: how quickly to ramp up users
   - nbDocuments: number of JSON document that each user uploads to its database
 
+To find out more, just have a look at the file
+
+`src/test/scala/org/kafecho/simulation/CouchDBSimulation`
+
+Once the simulation has run, Gatling will produce a useful summary as well as detailed graphical reports about response time distribution, throughput, etc, etc...
+
+The summary looks like the following:
+
+```
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                       2600 (OK=2600   KO=0     )
+> min response time                                      1 (OK=1      KO=-     )
+> max response time                                   5814 (OK=5814   KO=-     )
+> mean response time                                   456 (OK=456    KO=-     )
+> std deviation                                       1436 (OK=1436   KO=-     )
+> response time 95th percentile                       5564 (OK=5564   KO=-     )
+> response time 99th percentile                       5799 (OK=5799   KO=-     )
+> mean requests/sec                                  90.90 (OK=90.90  KO=-     )
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                          2401 ( 92%)
+> 800 ms < t < 1200 ms                                   0 (  0%)
+> t > 1200 ms                                          199 (  8%)
+> failed                                                 0 (  0%)
+================================================================================
+```
+
+## Writing your own simulation
+
+You write Gatling simulations in a Scala DSL with a fluent interface. Although not much knowledge of Scala is required, you sometimes need to be familiar with the syntax, especially when writing non-obvious tests.
+
 ## Resources
 
 The Jenkins plugin for Gatling is quite handy: https://wiki.jenkins-ci.org/display/JENKINS/Gatling+Plugin
+
+You just need to create a Maven Jenkins job which runs on of the mvn test commands above and configure the Gatling Jenkins plugin to track the output of this job. This will give you an idea of how / if the performance of your system changes over time.

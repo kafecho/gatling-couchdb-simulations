@@ -14,9 +14,9 @@ import java.util.UUID
 class CouchDBSimulation extends Simulation {
   val prefix = "CouchDBSimulation"
   val httpConf = http.baseURL(System.getProperty(s"$prefix.serverUrl", "http://127.0.0.1:5984"))
-  val nbUsers = System.getProperty(s"$prefix.nbUsers", "100").toInt
+  val nbUsers = System.getProperty(s"$prefix.nbUsers", "10").toInt
   val rampUpTime = System.getProperty(s"$prefix.rampUpTime", "2").toInt
-  val nbDocuments = System.getProperty(s"$prefix.nbDocuments", "10").toInt
+  val nbDocuments = System.getProperty(s"$prefix.nbDocuments", "50").toInt
 
   /** A Gatling feeder that generates random database names.*/
   val dbNameFeeder = Iterator.continually(Map("dbName" -> s"db-${UUID.randomUUID.toString}"))
