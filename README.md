@@ -58,6 +58,19 @@ The summary looks like the following:
 
 You write Gatling simulations in a Scala DSL with a fluent interface. Although not much knowledge of Scala is required, you sometimes need to be familiar with the syntax, especially when writing non-obvious tests.
 
+## Handling authentication
+
+If you have configured your CouchDB server with user accounts, you need to pass those credentials to Gatling, otherwise the requests will fail with HTTP 404 codes.
+You can simply modify your Scala simulation files to include the credentials that you want to pass.
+
+For example, append the credentials to the http protocol like so:
+
+```
+val httpConf = http.baseURL(System.getProperty(s"$prefix.serverUrl", "http://127.0.0.1:5984")).basicAuth("foo","bar")
+```
+
+Out of the box, Gatling also supports Digest authentication (see http://gatling.io/docs/2.1.7/http/http_protocol.html ).
+
 ## Resources
 
 The Jenkins plugin for Gatling is quite handy: https://wiki.jenkins-ci.org/display/JENKINS/Gatling+Plugin
